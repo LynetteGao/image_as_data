@@ -25,10 +25,8 @@ SEARCH_TERMS = ['Judy Mikovits','Bill Gates coronavirus','QAnon coronavirus','Co
 VIDEOS_PER_QUERY = 10
 
 # Check youtube api
-API_KEY = 'AIzaSyBfzxdjOF9YzMug9qElcIV-8dXx2pIlQIE'
-# Chen 'AIzaSyCP0UbEgiJLC_PWqKt_qa25ni78KvC5VIs'
-# Gao1 'AIzaSyBfzxdjOF9YzMug9qElcIV-8dXx2pIlQIE'
-# Gao2 'AIzaSyAJdT-mwRFlVnDNPnvtig4VEL2Shoz_f0c'
+API_KEY = 'apikey'
+
 
 yt_api = YouTubeDataAPI(API_KEY)
 yt_api.verify_key()
