@@ -19,13 +19,14 @@ import time
 
 # topic information
 TOPIC = 'Coronavirus'
-SEARCH_TERMS = ['Judy Mikovits','Bill Gates coronavirus','QAnon coronavirus','Coronavirus Vaccination',
-               'Wuhan lab', 'bioweapon coronavirus','5G coronavirus','coronavirus flu'
-                ,'dean koontz darkness']  ##adding eveloped search terms here
+SEARCH_TERMS = ['coronavirus']
+            # ['Judy Mikovits','Bill Gates coronavirus','QAnon coronavirus','Coronavirus Vaccination',
+            #                'Wuhan lab', 'bioweapon coronavirus','5G coronavirus','coronavirus flu'
+            #                 ,'dean koontz darkness']  ##adding eveloped search terms here
 VIDEOS_PER_QUERY = 10
 
 # Check youtube api
-API_KEY = 'apikey'
+API_KEY = 'your api key'
 
 
 yt_api = YouTubeDataAPI(API_KEY)
@@ -55,14 +56,14 @@ end = 27  # You can Change the end searching day here
 # iterate search terms to collect videos and metadata
 for term in SEARCH_TERMS:
     DATES = []
-    DATES_MARCH = [datetime.datetime(2020, 3, day, 0, 0) for day in range(4, 32)]
-    DATES_APRIL = [datetime.datetime(2020, 4, day, 0, 0) for day in range(21, 31)]
-    DATES_MAY = [datetime.datetime(2020, 5, day, 0, 0) for day in range(1, end)]
+    DATES_MARCH = [datetime.datetime(2020, 3, day, 0, 0) for day in range(1, 32)]
+    DATES_APRIL = [datetime.datetime(2020, 4, day, 0, 0) for day in range(1, 31)]
+    DATES_MAY = [datetime.datetime(2020, 5, day, 0, 0) for day in range(1, 32)]
     DATES += DATES_MARCH
     DATES += DATES_APRIL
     DATES += DATES_MAY
     #DATES.append((datetime.datetime(2020, 5, end-1, 23, 59, 59)))
-    DATES.append((datetime.datetime(2020, 5, end, 23, 59, 59)))
+    # DATES.append((datetime.datetime(2020, 5, end, 23, 59, 59)))
 
     print('searching current term: [{}]'.format(term))
     for i in range(len(DATES) - 1):
@@ -89,7 +90,7 @@ for term in SEARCH_TERMS:
         for info in _metadata:
             info.update({'science topic': TOPIC})
             info.update({'search term': term})
-            id = 'id:' + info.get('video_id')
+            id = info.get('video_id') #'id:' + info.get('video_id')
             info.update({'video_id': id})  # avoid garbbled characters in csv
         print('  total [{}] videos collected'.format(len(_metadata)))
         METADATA += _metadata
@@ -103,12 +104,12 @@ for term in SEARCH_TERMS:
               'video_thumbnail', 'video_tags', 'collection_date', 'science topic', 'search term']
 
     # store the data as binary data stream
-    with open('../data/term+'.data', 'wb') as filehandle:
-        pickle.dump(METADATA, filehandle)
+    # with open('../data/term+'.data', 'wb') as filehandle:
+    #     pickle.dump(METADATA, filehandle)
 
     try:
-        with open('../output/term + '-May'+ str(end)+ '.csv', 'w', newline='', encoding='utf-8') as csvfile:
-        #with open('5Gtest.csv', 'w', newline='', encoding='utf-8') as csvfile:  # has to handle unicode
+        # with open('../output/term + '-May'+ str(end)+ '.csv', 'w', newline='', encoding='utf-8') as csvfile:
+        with open('covid19.csv', 'w', newline='', encoding='utf-8') as csvfile:  # has to handle unicode
             writer = csv.DictWriter(csvfile, fieldnames=column)
             writer.writeheader()
             for data in METADATA:
