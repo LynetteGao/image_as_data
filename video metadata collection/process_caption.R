@@ -3,15 +3,10 @@ library(tidyverse)
 library(RVerbalExpressions)
 
 
-setwd("~/Documents/GitHub/YouTube-Propaganda-Effects")
-
-viral <- read.csv("./COVID19/English videos/En458BillGates_May23.csv",header = TRUE)
-
-
-viral$video_id <- trimws(viral$video_id, which = c("left"))
+viral <- read.csv("dummy.csv",header = TRUE)
 
 trans_json <- read_json(
-  ("./COVID19/English videos/transcripts/BillGates_script.json")
+  ("test.json")
 )
 
 
@@ -72,10 +67,11 @@ transcripts <- tibble(
   video_id = trans_names,
   #raw_transcript = as.character(trans_raw),
   transcript = trans_clean,
-  transcript_nchar = nchar(trans_clean)
+  transcript_nchar = nchar(trans_clean), # 
+  transcript_length = sapply(strsplit(trans_clean, " "), length)
 )
 
-transcripts$video_id <- trimws(transcripts$video_id, which = c("left"))
+# transcripts$video_id <- trimws(transcripts$video_id, which = c("left"))
 
 # transcripts %>%
 #   arrange(transcript_nchar) %>%
@@ -89,8 +85,6 @@ transcripts$video_id <- trimws(transcripts$video_id, which = c("left"))
 
 with_transcript <- viral %>% left_join(transcripts, by = "video_id")
 
-library(here)
+
 write_csv(
-  with_transcript,
-  here("./COVID19/English videos/training data(top40+English+transcript)/BG_Entranscript.csv")
-)
+  with_transcript, "processed_caption.csv")
