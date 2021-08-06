@@ -31,8 +31,14 @@
 
 #### Table 4(a). Performance comparison in identifying conspiracy videos from correction videos. 
 
-You can find all the model setups under latest models/models-debunk. .ipynb files are holders to train the models. Within each ipynb folder, you can find the corresponding models and their performance. h5 files are the output models.
+You can find all the model setups and input data files under latest models/models-debunk. .ipynb files are holders to train the models. Within each ipynb folder, you can find the corresponding models and their performance. h5 files are the output models.
 
 #### Appendix IV. Correlation matrix of the visual features used in Model 4
 
+Running statistics test/heatmap.ipynb to generate correlation matrix of the visual features with input handlabel_feature.csv.
+
+
+#### Appendix V. Performance comparison in identifying conspiracy videos from normal videos. 
+
+You can find all the model setups and input data files under latest models/models-normal. .ipynb files are holders to train the models. Within each ipynb folder, you can find the corresponding models and their performance. h5 files are the output models.
 
